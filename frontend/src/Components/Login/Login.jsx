@@ -5,8 +5,8 @@ export default function Login() {
   const [activeTab, setActiveTab] = useState("signin");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-700 py-8">
-      <div className="bg-white dark:bg-gray-800 shadow-lg rounded-xl p-8 w-full max-w-md mx-auto">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 py-8">
+      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md mx-auto">
         
         {/* Tabs */}
         <div className="flex mb-6">
@@ -15,7 +15,7 @@ export default function Login() {
             className={`w-1/2 py-2 rounded-lg font-medium transition ${
               activeTab === "signin"
                 ? "bg-blue-600 text-white"
-                : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+                : "bg-gray-100 text-gray-600"
             }`}
           >
             Sign In
@@ -25,7 +25,7 @@ export default function Login() {
             className={`w-1/2 py-2 rounded-lg font-medium transition ${
               activeTab === "join"
                 ? "bg-blue-600 text-white"
-                : "bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300"
+                : "bg-gray-100 text-gray-600"
             }`}
           >
             Join Platform
@@ -36,10 +36,10 @@ export default function Login() {
         {activeTab === "signin" ? (
           <>
             {/* Sign In Form */}
-            <h2 className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-2">
+            <h2 className="text-2xl font-bold text-center text-gray-800  mb-2">
               Welcome Back
             </h2>
-            <p className="text-center text-gray-500 dark:text-gray-400 mb-6">
+            <p className="text-center text-gray-500 mb-6">
               Continue your mission to protect our oceans
             </p>
 

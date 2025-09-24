@@ -44,19 +44,19 @@ export default function KPIs() {
       {cards.map((c, index) => (
         <div 
           key={c.label} 
-          className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl dark:hover:shadow-2xl transition-all duration-300 rounded-xl border border-gray-200 dark:border-gray-700 p-6 transform hover:-translate-y-1"
+          className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 rounded-xl border border-gray-200 p-6 transform hover:-translate-y-1"
         >
           <div className="flex items-center justify-between mb-4">
             <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${c.color} flex items-center justify-center text-white text-xl shadow-lg`}>
               {c.icon}
             </div>
             <div className="text-right">
-              <div className="text-3xl font-bold text-gray-800 dark:text-gray-200">{c.value}</div>
+              <div className="text-3xl font-bold text-gray-800">{c.value}</div>
             </div>
           </div>
           <div className="space-y-2">
-            <div className="text-sm font-semibold text-gray-700 dark:text-gray-300">{c.label}</div>
-            <div className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+            <div className="text-sm font-semibold text-gray-700">{c.label}</div>
+            <div className="text-xs text-gray-500 leading-relaxed">
               Real-time data from verified sources and social monitoring
             </div>
           </div>

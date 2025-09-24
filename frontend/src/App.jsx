@@ -5,6 +5,7 @@ import Report from './Components/Report/Report.jsx';
 import WindyInteractive from './Components/Map/WindyInteractive.jsx';
 import Login from './Components/Login/Login.jsx';
 import Dashboard from './Components/Dashboard/Dashboard.jsx';
+
 const App = () => {
   return (
     <BrowserRouter>

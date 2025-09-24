@@ -128,51 +128,6 @@ const useStore = create((set, get) => ({
       });
     }
   },
-
-  // Dark mode state and actions
-  isDarkMode: false,
-  toggleDarkMode: () => set((state) => {
-    const newDarkMode = !state.isDarkMode;
-    // Save to localStorage
-    localStorage.setItem('darkMode', JSON.stringify(newDarkMode));
-    // Apply dark mode to document
-    if (newDarkMode) {
-      document.documentElement.classList.add('dark');
-      document.body.style.backgroundColor = '#111827';
-      document.body.style.color = '#f3f4f6';
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.body.style.backgroundColor = '#ffffff';
-      document.body.style.color = '#111827';
-    }
-    return { isDarkMode: newDarkMode };
-  }),
-  initializeDarkMode: () => set(() => {
-    // Check for saved preference or system preference
-    const savedTheme = localStorage.getItem('darkMode');
-    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = savedTheme !== null ? JSON.parse(savedTheme) : systemDark;
-    
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-      document.body.style.backgroundColor = '#111827';
-      document.body.style.color = '#f3f4f6';
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.body.style.backgroundColor = '#ffffff';
-      document.body.style.color = '#111827';
-    }
-    return { isDarkMode: isDark };
-  }),
-  setDarkMode: (isDark) => set(() => {
-    localStorage.setItem('darkMode', JSON.stringify(isDark));
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-    return { isDarkMode: isDark };
-  }),
 }));
 
 export default useStore;

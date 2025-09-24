@@ -48,7 +48,7 @@ export default function ReportsTable() {
   return (
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-        <h3 className="font-bold text-xl text-gray-800 dark:text-gray-200">Crowdsourced Reports</h3>
+        <h3 className="font-bold text-xl text-gray-800">Crowdsourced Reports</h3>
         <button
           onClick={() =>
             submitReportOfflineAware({
@@ -67,44 +67,44 @@ export default function ReportsTable() {
           Quick Submit (Demo)
         </button>
       </div>
-      <div className="overflow-auto rounded-lg border border-gray-200 dark:border-gray-700">
+      <div className="overflow-auto rounded-lg border border-gray-200">
         <table className="min-w-full text-sm">
-          <thead className="bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 border-b border-gray-200 dark:border-gray-600">
+          <thead className="bg-gradient-to-r from-gray-100 to-gray-200 border-b border-gray-200">
             <tr>
-              <th className="px-4 py-3 text-left font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider text-xs">
+              <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
                 🕐 Time
               </th>
-              <th className="px-4 py-3 text-left font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider text-xs">
+              <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
                 📊 Type
               </th>
-              <th className="px-4 py-3 text-left font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider text-xs">
+              <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
                 📍 Location
               </th>
-              <th className="px-4 py-3 text-left font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider text-xs">
+              <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
                 👥 Source
               </th>
-              <th className="px-4 py-3 text-left font-bold text-gray-800 dark:text-gray-200 uppercase tracking-wider text-xs">
+              <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
                 🛡️ Reliability
               </th>
             </tr>
           </thead>
-          <tbody className="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+          <tbody className="bg-white divide-y divide-gray-200">
             {reports.map((r, idx) => (
-              <tr key={idx} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
-                <td className="px-4 py-3 text-gray-700 dark:text-gray-300 font-medium">
+              <tr key={idx} className="hover:bg-gray-50 transition-colors duration-200">
+                <td className="px-4 py-3 text-gray-700 font-medium">
                   {new Date(r.ts).toLocaleString()}
                 </td>
                 <td className="px-4 py-3">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-blue-800">
                     {r.eventType}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-gray-700 dark:text-gray-300">
+                <td className="px-4 py-3 text-gray-700">
                   <div className="flex flex-col">
                     <span className="font-medium text-sm">
                       {getLocationName(r.lat, r.lng)}
                     </span>
-                    <span className="text-xs text-gray-500 dark:text-gray-400 font-mono">
+                    <span className="text-xs text-gray-500 font-mono">
                       {r.lat.toFixed(3)}, {r.lng.toFixed(3)}
                     </span>
                   </div>
@@ -112,10 +112,10 @@ export default function ReportsTable() {
                 <td className="px-4 py-3">
                   <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold ${
                     r.source === 'Citizen' 
-                      ? 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200'
+                      ? 'bg-green-100 text-green-800'
                       : r.source === 'Official'
-                      ? 'bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200'
-                      : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
+                      ? 'bg-purple-100 text-purple-800'
+                      : 'bg-gray-100 text-gray-800'
                   }`}>
                     {r.source}
                   </span>
@@ -126,7 +126,7 @@ export default function ReportsTable() {
                       (r.weight ?? 0.5) >= 0.8 ? 'bg-green-500' :
                       (r.weight ?? 0.5) >= 0.6 ? 'bg-yellow-500' : 'bg-red-500'
                     }`}></div>
-                    <span className="text-gray-700 dark:text-gray-300 font-semibold">
+                    <span className="text-gray-700 font-semibold">
                       {r.weight ?? 0.5}
                     </span>
                   </div>
@@ -136,8 +136,8 @@ export default function ReportsTable() {
           </tbody>
         </table>
       </div>
-      <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900 rounded-lg border border-blue-200 dark:border-blue-700">
-        <p className="text-xs text-blue-700 dark:text-blue-300 leading-relaxed">
+      <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+        <p className="text-xs text-blue-700 leading-relaxed">
           <span className="font-medium">🔄 Offline Sync:</span> Reports are queued using Workbox Background Sync when offline and automatically submitted when connection is restored.
         </p>
       </div>
