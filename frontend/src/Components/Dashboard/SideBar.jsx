@@ -1,12 +1,13 @@
 // src/components/Sidebar.jsx
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 const nav = [
-  { name: "Dashboard", icon: "📊" },
-  { name: "Map", icon: "🗺️" },
-  { name: "Reports", icon: "📝" },
-  { name: "Social", icon: "💬" },
-  { name: "Settings", icon: "⚙️" },
+  { name: "Dashboard", path: "/dashboard" },
+  { name: "Map", path: "/map" },
+  { name: "Reports", path: "/report" },
+  { name: "Social", path: "/social" },
+  { name: "Settings", path: "/settings" },
 ];
 
 export default function Sidebar() {
@@ -18,20 +19,17 @@ export default function Sidebar() {
       </div>
       <nav className="p-4 space-y-2 flex-1">
         {nav.map((n, index) => (
-          <a
+          <NavLink
             key={n.name}
-            href="#"
-            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium group ${
-              index === 0 
+            to={n.path}
+            className={({ isActive }) => `flex items-center px-4 py-3 rounded-lg transition-all duration-200 text-sm font-medium group ${
+              isActive 
                 ? 'bg-blue-50 text-blue-700 border-l-4 border-blue-500' 
                 : 'text-gray-700 hover:bg-gray-50 hover:text-blue-600 hover:translate-x-1'
             }`}
           >
-            <span className={`text-lg ${index === 0 ? 'text-blue-600' : 'text-gray-500 group-hover:text-blue-500'}`}>
-              {n.icon}
-            </span>
             <span>{n.name}</span>
-          </a>
+          </NavLink>
         ))}
       </nav>
       <div className="mt-auto p-4 bg-gray-50 border-t border-gray-200 rounded-t-lg">
