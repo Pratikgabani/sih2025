@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './style.css'
@@ -26,3 +27,17 @@ ReactDOM.createRoot(document.getElementById('app')).render(
     <RouterProvider router={router} />
   </React.StrictMode>,
 )
+=======
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './style.css';
+import App from './App.jsx';
+
+const container = document.getElementById('app');
+const root = ReactDOM.createRoot(container);
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
+>>>>>>> 9f3000a8aa357c73acb794ac49e69729cadb1c38
