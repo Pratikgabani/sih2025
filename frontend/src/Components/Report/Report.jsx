@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Camera, MapPin, Send, Upload, Mic, AlertTriangle } from 'lucide-react';
 
-const ReportHazard = ({ user }) => {
+const Report = ({ user }) => {
   const [formData, setFormData] = useState({
     hazardType: '',
     severity: '',
@@ -240,4 +240,4 @@ const ReportHazard = ({ user }) => {
   );
 };
 
-export default ReportHazard;
+export default Report;
