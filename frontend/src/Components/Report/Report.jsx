@@ -189,7 +189,7 @@ const Report = ({ user }) => {
                   className="aspect-square bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl hover:border-blue-400 hover:bg-blue-50 transition-colors duration-200 flex flex-col items-center justify-center text-gray-500 hover:text-blue-500"
                 >
                   <Camera className="w-8 h-8 mb-2" />
-                  <span className="text-sm font-medium">Take Photo</span>
+                  <span className="text-sm font-medium">Take Photo / Video</span>
                 </button>
                 {/* <button
                   type="button"
