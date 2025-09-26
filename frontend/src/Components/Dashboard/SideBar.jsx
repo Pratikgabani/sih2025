@@ -6,8 +6,8 @@ const nav = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Map", path: "/map" },
   { name: "Reports", path: "/report" },
-  { name: "Social", path: "/social" },
-  { name: "Settings", path: "/settings" },
+  // { name: "Social", path: "/social" },
+  // { name: "Settings", path: "/settings" },
 ];
 
 export default function Sidebar() {
@@ -32,7 +32,7 @@ export default function Sidebar() {
           </NavLink>
         ))}
       </nav>
-      <div className="mt-auto p-4 bg-gray-50 border-t border-gray-200 rounded-t-lg">
+      {/* <div className="mt-auto p-4 bg-gray-50 border-t border-gray-200 rounded-t-lg">
         <div className="flex items-center gap-2 mb-2">
           <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
           <span className="text-xs font-medium text-gray-600">System Status</span>
@@ -40,7 +40,7 @@ export default function Sidebar() {
         <p className="text-xs text-gray-500 leading-relaxed">
           PWA enabled for offline reporting with background sync capabilities.
         </p>
-      </div>
+      </div> */}
     </aside>
   );
 }

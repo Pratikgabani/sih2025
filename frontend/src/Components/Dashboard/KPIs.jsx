@@ -1,6 +1,21 @@
 // src/components/KPIs.jsx
 import React from "react";
 import useStore from "../../store/UseStore";
+// Live Reports
+import { BoltIcon } from "@heroicons/react/24/outline";
+
+
+// Verified Incidents
+import { CheckBadgeIcon } from "@heroicons/react/24/outline";
+
+
+// Hotspot Areas
+import { FireIcon } from "@heroicons/react/24/outline";
+
+
+// Social Mentions
+import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
+
 
 export default function KPIs() {
   const { kpis } = useStore();
@@ -8,7 +23,7 @@ export default function KPIs() {
     { 
       label: "Live Reports (24h)", 
       value: kpis.reports24h, 
-      icon: "📊", 
+      icon: <BoltIcon className="h-9 w-9" />, 
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-50",
       textColor: "text-blue-700"
@@ -16,7 +31,7 @@ export default function KPIs() {
     { 
       label: "Verified Incidents", 
       value: kpis.verified, 
-      icon: "✅", 
+      icon: <CheckBadgeIcon className="h-9 w-9" />, 
       color: "from-green-500 to-green-600",
       bgColor: "bg-green-50",
       textColor: "text-green-700"
@@ -24,7 +39,7 @@ export default function KPIs() {
     { 
       label: "Hotspot Areas", 
       value: kpis.hotspots, 
-      icon: "🔥", 
+      icon: <FireIcon className="h-9 w-9" />, 
       color: "from-red-500 to-red-600",
       bgColor: "bg-red-50",
       textColor: "text-red-700"
@@ -32,7 +47,7 @@ export default function KPIs() {
     { 
       label: "Social Mentions (1h)", 
       value: kpis.social1h, 
-      icon: "💬", 
+      icon: <ChatBubbleLeftRightIcon className="h-9 w-9" />, 
       color: "from-purple-500 to-purple-600",
       bgColor: "bg-purple-50",
       textColor: "text-purple-700"

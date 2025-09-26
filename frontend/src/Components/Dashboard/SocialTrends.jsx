@@ -17,15 +17,15 @@ export default function SocialTrends() {
             </div>
             <div className="text-sm text-gray-700 font-medium mb-2">
               <span className="inline-flex items-center gap-1">
-                📊 <span className="text-green-600">Mentions: {s.mentions}</span>
+                 <span className="">Mentions: {s.mentions}</span>
               </span>
               <span className="mx-2">·</span>
               <span className="inline-flex items-center gap-1">
-                💭 <span className="text-blue-600">Sentiment: {s.sentiment}</span>
+                 <span className="">Sentiment: {s.sentiment}</span>
               </span>
               <span className="mx-2">·</span>
               <span className="inline-flex items-center gap-1">
-                🔥 <span className="text-purple-600">Engagement: {s.engagement}</span>
+                 <span className="">Engagement: {s.engagement}</span>
               </span>
             </div>
             <div className="text-xs text-gray-600 leading-relaxed">

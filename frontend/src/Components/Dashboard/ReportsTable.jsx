@@ -49,7 +49,7 @@ export default function ReportsTable() {
     <div>
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <h3 className="font-bold text-xl text-gray-800">Crowdsourced Reports</h3>
-        <button
+        {/* <button
           onClick={() =>
             submitReportOfflineAware({
               eventType: "High Waves",
@@ -65,26 +65,26 @@ export default function ReportsTable() {
         >
           <span>🚀</span>
           Quick Submit (Demo)
-        </button>
+        </button> */}
       </div>
       <div className="overflow-auto rounded-lg border border-gray-200">
         <table className="min-w-full text-sm">
           <thead className="bg-gradient-to-r from-gray-100 to-gray-200 border-b border-gray-200">
             <tr>
               <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
-                🕐 Time
+                 Time
               </th>
               <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
-                📊 Type
+                 Type
               </th>
               <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
-                📍 Location
+                 Location
               </th>
               <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
-                👥 Source
+                 Source
               </th>
               <th className="px-4 py-3 text-left font-bold text-gray-800 uppercase tracking-wider text-xs">
-                🛡️ Reliability
+                 Reliability
               </th>
             </tr>
           </thead>

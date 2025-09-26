@@ -2,7 +2,7 @@
 // src/components/Filters.jsx
 import React from "react";
 import useStore from "../../store/UseStore";
-
+import { FunnelIcon  } from "@heroicons/react/24/outline";
 export default function Filters() {
   const {
     filters,
@@ -17,7 +17,8 @@ export default function Filters() {
     <div className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl border border-gray-200 p-6">
       <div className="flex items-center gap-3 mb-4">
         <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-          <span className="text-white text-sm">🔍</span>
+          <span className="text-white text-sm"><FunnelIcon className="h-5 w-5" />
+</span>
         </div>
         <h2 className="text-lg font-semibold text-gray-800">Smart Filters</h2>
       </div>
@@ -83,7 +84,7 @@ export default function Filters() {
             onClick={refreshData}
             className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-medium px-6 py-2 rounded-lg transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
           >
-            <span>🔄</span>
+            
             Apply Filters
           </button>
         </div>

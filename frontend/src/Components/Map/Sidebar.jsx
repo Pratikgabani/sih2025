@@ -79,7 +79,7 @@ const Sidebar = ({
         </div>
 
         <div className="panel">
-          <h4>Media Upload</h4>
+          {/* <h4>Media Upload</h4>
           <div
             id="uploadZone"
             className="upload-zone"
@@ -90,7 +90,7 @@ const Sidebar = ({
           >
             <p>Drag & drop files here or click to browse</p>
             <input ref={fileRef} type="file" multiple accept="image/*,video/*" className="hidden" onChange={handleFileChange} />
-          </div>
+          </div> */}
         </div>
 
         <div className="panel">
@@ -115,16 +115,16 @@ const Sidebar = ({
         </div>
 
         <div className="panel">
-          <h4>Incident Report</h4>
-          <textarea
+          {/* <h4>Incident Report</h4> */}
+          {/* <textarea
             value={reportText}
             onChange={(e) => setReportText(e.target.value)}
             rows={3}
             placeholder="Describe weather conditions..."
             maxLength={500}
-          />
+          /> */}
           <div className="panel-actions">
-            <small>{reportText.length}/500</small>
+            {/* <small>{reportText.length}/500</small> */}
             <div>
               <button className="btn btn-orange" onClick={() => { onSaveReport(reportText); setReportText(""); }}>
                 Save Report
