@@ -65,13 +65,13 @@ const Report = ({ user }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 py-8">
+    <div className="py-8">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl mb-4 shadow-lg">
+          {/* <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl mb-4 shadow-lg">
             <AlertTriangle className="w-8 h-8 text-white" />
-          </div>
+          </div> */}
           <h1 className="text-4xl font-bold text-gray-800 mb-2">Report Ocean Hazard</h1>
           <p className="text-gray-600">Help protect coastal communities by reporting hazardous ocean conditions</p>
         </div>

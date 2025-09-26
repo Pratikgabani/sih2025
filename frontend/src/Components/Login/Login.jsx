@@ -5,8 +5,8 @@ export default function Login() {
   const [activeTab, setActiveTab] = useState("signin");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-blue-100 to-blue-200 py-8">
-      <div className="bg-white shadow-lg rounded-xl p-8 w-full max-w-md mx-auto">
+    <div className="min-h-full flex items-center justify-center py-4 md:py-8">
+      <div className="bg-white shadow-lg rounded-xl p-6 md:p-8 w-full max-w-md mx-4 md:mx-auto">
         
         {/* Tabs */}
         <div className="flex mb-6">

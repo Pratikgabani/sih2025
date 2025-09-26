@@ -273,22 +273,18 @@ const WindyInteractive = () => {
   }, [hotspots, uploadedFiles, reports, currentLayer]);
 
   return (
-    <div className="windy-interactive-root">
-      <header className="header">
-        <div className="header-left">
-          <button id="toggleSidebar" className="toggle-sidebar">☰</button>
-          <div className="logo">
-            <i className="fas fa-water" /> <div className="title">Windy Interactive - Ocean Monitor</div>
-          </div>
+    <div className="windy-interactive-root h-full">
+      {/* Header with controls - simplified for layout integration */}
+      <div className="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-gray-800">Ocean Monitor - Interactive Map</h2>
+        <div className="flex gap-2">
+          <button onClick={exportHotspotsCSV} className="px-3 py-1 bg-green-500 text-white rounded text-sm hover:bg-green-600">Export CSV</button>
+          <button onClick={exportReportsCSV} className="px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600">Reports</button>
+          <button onClick={clearAllData} className="px-3 py-1 bg-red-500 text-white rounded text-sm hover:bg-red-600">Clear</button>
         </div>
-        <div className="header-actions">
-          <button onClick={exportHotspotsCSV} className="btn btn-green">Export CSV</button>
-          <button onClick={exportReportsCSV} className="btn btn-blue">Reports</button>
-          <button onClick={clearAllData} className="btn btn-red">Clear</button>
-        </div>
-      </header>
+      </div>
 
-      <div className="main flex">
+      <div className="main flex flex-1">
         <Sidebar
           onLayerSwitch={switchLayer}
           currentLayer={currentLayer}

@@ -1,6 +1,5 @@
 // src/components/Dashboard.jsx
 import React from "react";
-import Sidebar from "./Sidebar";
 import KPIs from "./KPIs";
 import Filters from "./Filters";
 // import MapView from "./MapView";
@@ -12,10 +11,7 @@ export default function Dashboard() {
   const { role } = useStore();
 
   return (
-    <div className="w-full min-h-screen flex flex-col md:flex-row bg-gradient-to-br from-blue-50 via-white to-indigo-50 text-gray-800">
-      <Sidebar />
-      <div className="flex-1 flex flex-col min-w-0">
-        <main className="p-4 md:p-6 space-y-4 md:space-y-6 overflow-auto flex-1 scrollbar-thin">
+    <div className="px-4 pt-2 pb-4 md:p-6 space-y-4 md:space-y-6 overflow-auto flex-1 scrollbar-thin">
           <div className="animate-fadeInUp">
             <KPIs />
           </div>
@@ -60,8 +56,6 @@ export default function Dashboard() {
               </p>
             </div>
           )}
-        </main>
-      </div>
     </div>
   );
 }
