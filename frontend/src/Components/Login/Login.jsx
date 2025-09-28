@@ -1,8 +1,18 @@
 
 import React, { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
   const [activeTab, setActiveTab] = useState("signin");
+  const [signInRole, setSignInRole] = useState("citizen");
+  const [joinRole, setJoinRole] = useState("");
+  const navigate = useNavigate();
+
+  const gotoByRole = (role) => {
+    localStorage.setItem("role", role);
+    if (role === "citizen") navigate("/citizen/dashboard");
+    else navigate("/dashboard");
+  };
 
   return (
     <div className="min-h-full flex items-start justify-center py-4 md:py-8">
@@ -43,7 +53,7 @@ export default function Login() {
               Continue your mission to protect our oceans
             </p>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={(e)=>{ e.preventDefault(); gotoByRole(signInRole); }}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Email Address
@@ -64,6 +74,20 @@ export default function Login() {
                   className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Role
+                </label>
+                <select
+                  value={signInRole}
+                  onChange={(e)=>setSignInRole(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
+                >
+                  <option value="citizen">Citizen Reporter</option>
+                  <option value="analyst">Analyst</option>
+                  <option value="government">Government Official</option>
+                </select>
+              </div>
               <button
                 type="submit"
                 className="w-full py-2 rounded-lg bg-blue-600 text-white font-semibold hover:opacity-90 transition"
@@ -82,7 +106,7 @@ export default function Login() {
               Help us create a safer ocean environment for everyone
             </p>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={(e)=>{ e.preventDefault(); gotoByRole(joinRole || 'citizen'); }}>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Full Name
@@ -107,11 +131,14 @@ export default function Login() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Your Role
                 </label>
-                <select className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-500">
+                <select
+                  value={joinRole}
+                  onChange={(e)=>setJoinRole(e.target.value)}
+                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
+                >
                   <option value="">Select your role</option>
-                  {/* <option value="researcher">Marine Researcher</option> */}
                   <option value="citizen">Citizen Reporter</option>
-                  <option value="analyst">Analysts</option>
+                  <option value="analyst">Analyst</option>
                   <option value="government">Government Official</option>
                 </select>
               </div>
