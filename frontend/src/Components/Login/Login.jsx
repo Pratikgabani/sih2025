@@ -5,8 +5,8 @@ export default function Login() {
   const [activeTab, setActiveTab] = useState("signin");
 
   return (
-    <div className="min-h-full flex items-center justify-center py-4 md:py-8">
-      <div className="bg-white shadow-lg rounded-xl p-6 md:p-8 w-full max-w-md mx-4 md:mx-auto">
+    <div className="min-h-full flex items-start justify-center py-4 md:py-8">
+      <div className="bg-white shadow-lg rounded-xl p-6 md:p-8 w-full max-w-md mx-4 md:mx-auto min-h-fit">
         
         {/* Tabs */}
         <div className="flex mb-6">
@@ -66,7 +66,7 @@ export default function Login() {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 rounded-lg bg-gradient-to-r from-blue-500 to-teal-400 text-white font-semibold hover:opacity-90 transition"
+                className="w-full py-2 rounded-lg bg-blue-600 text-white font-semibold hover:opacity-90 transition"
               >
                 Access Platform
               </button>
@@ -137,7 +137,7 @@ export default function Login() {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 rounded-lg bg-gradient-to-r from-blue-500 to-teal-400 text-white font-semibold hover:opacity-90 transition"
+                className="w-full py-2 rounded-lg  bg-blue-600 text-white font-semibold hover:opacity-90 transition"
               >
                 Join the Platform
               </button>
