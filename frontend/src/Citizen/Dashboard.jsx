@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import ReadOnlyMapLibre from '../Components/Map/ReadOnlyMapLibre.jsx';
 import { getProfile, isProfileComplete, saveProfile, getReports, canSubmitReportToday, saveReports } from './utils/storage';
-import { FunnelIcon } from '@heroicons/react/24/outline';
+import { FunnelIcon, CameraIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const Dashboard = () => {
   const [profile, setProfile] = useState(getProfile());
@@ -12,6 +12,11 @@ const Dashboard = () => {
   const [quickType, setQuickType] = useState('');
   const [quickSeverity, setQuickSeverity] = useState('low');
   const [quickLocation, setQuickLocation] = useState('');
+  const [photo, setPhoto] = useState(null);
+  const [cameraOpen, setCameraOpen] = useState(false);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null);
+  const streamRef = useRef(null);
   const emergencyContacts = [
     { label: 'Emergency', phone: '112' },
     { label: 'Police', phone: '100' },
@@ -67,10 +72,56 @@ const Dashboard = () => {
   const hotspotBounds = { top: 90, bottom: -90, left: -180, right: 180 };
   const hotspots = [];
 
+  const startCamera = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        streamRef.current = stream;
+        setCameraOpen(true);
+      }
+    } catch (err) {
+      console.error('Error accessing camera:', err);
+      alert('Could not access the camera. Please check permissions.');
+    }
+  };
+
+  const stopCamera = () => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop());
+      streamRef.current = null;
+    }
+    setCameraOpen(false);
+  };
+
+  const capturePhoto = () => {
+    if (videoRef.current && canvasRef.current) {
+      const video = videoRef.current;
+      const canvas = canvasRef.current;
+      const context = canvas.getContext('2d');
+      
+      // Set canvas dimensions to match video
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      
+      // Draw current video frame to canvas
+      context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+      // Convert canvas to data URL and set as photo
+      setPhoto(canvas.toDataURL('image/jpeg'));
+      stopCamera();
+    }
+  };
+
+  const removePhoto = () => {
+    setPhoto(null);
+  };
+
   const handleQuickReport = () => {
     const check = canSubmitReportToday();
     if (!check.allowed) { alert('Daily limit reached (10 reports). Try again tomorrow.'); return; }
     if (!quickType) { alert('Select a hazard type first.'); return; }
+    
     const newReport = {
       id: Date.now(),
       title: 'Quick Report',
@@ -78,10 +129,18 @@ const Dashboard = () => {
       severity: quickSeverity,
       location: quickLocation,
       description: 'Quick hazard report',
+      photo: photo, // Include the photo in the report
       createdAt: new Date().toISOString()
     };
+    
     const arr = [newReport, ...getReports()];
     saveReports(arr);
+    
+    // Reset form
+    setQuickType('');
+    setQuickSeverity('low');
+    setPhoto(null);
+    
     alert('Quick report submitted.');
   };
 
@@ -209,7 +268,66 @@ const Dashboard = () => {
                 { label: 'Critical', value: 'critical' }
               ]}
             />
+            <button
+              type="button"
+              onClick={photo ? removePhoto : startCamera}
+              className={`px-3 py-2 rounded-lg flex items-center gap-2 ${photo ? 'bg-red-50 text-red-600' : 'bg-sky-50 text-sky-700'} hover:opacity-90 transition-colors`}
+            >
+              {photo ? (
+                <>
+                  <XMarkIcon className="w-5 h-5" />
+                  <span>Remove Photo</span>
+                </>
+              ) : (
+                <>
+                  <CameraIcon className="w-5 h-5" />
+                  <span></span>
+                </>
+              )}
+            </button>
           </div>
+          
+          {/* Camera preview and capture UI */}
+          {cameraOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-75 flex flex-col items-center justify-center z-50 p-4">
+              <div className="w-full max-w-md bg-white rounded-lg overflow-hidden">
+                <div className="relative" style={{ paddingTop: '75%' }}>
+                  <video
+                    ref={videoRef}
+                    autoPlay
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <canvas ref={canvasRef} className="hidden" />
+                </div>
+                <div className="p-4 flex justify-center gap-4 bg-gray-50">
+                  <button
+                    onClick={capturePhoto}
+                    className="p-3 bg-white rounded-full shadow-lg hover:bg-gray-100"
+                  >
+                    <div className="w-10 h-10 rounded-full bg-red-500 border-4 border-white"></div>
+                  </button>
+                  <button
+                    onClick={stopCamera}
+                    className="p-3 text-gray-600 hover:text-gray-800"
+                  >
+                    <XMarkIcon className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+          
+          {/* Photo preview */}
+          {photo && (
+            <div className="mb-3 relative group">
+              <img 
+                src={photo} 
+                alt="Captured hazard" 
+                className="w-full h-40 object-cover rounded-lg border border-gray-200"
+              />
+            </div>
+          )}
           <button onClick={handleQuickReport} disabled={!quickType} className="w-full py-2 bg-gradient-to-r from-sky-500 to-sky-600 text-white rounded-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed">Submit</button>
           {quickLocation && (
             <p className="mt-2 text-xs text-gray-500">Auto location: {quickLocation}</p>

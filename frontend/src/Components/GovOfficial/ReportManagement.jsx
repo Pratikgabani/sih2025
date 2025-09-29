@@ -204,7 +204,7 @@ export default function ReportManagement() {
       {/* Smart Filters */}
       <div className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl border border-gray-200 p-6">
         <div className="flex items-center gap-3 mb-4">
-          <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
             <Filter className="w-5 h-5 text-white" />
           </div>
           <h2 className="text-lg font-semibold text-gray-800">Smart Filters</h2>
@@ -214,7 +214,7 @@ export default function ReportManagement() {
           <div className="space-y-2">
             <label className="text-sm font-medium text-gray-700">Report Status</label>
             <select
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white hover:border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all duration-200"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm bg-white hover:border-blue-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 shadow-sm"
               value={selectedFilter}
               onChange={(e) => setSelectedFilter(e.target.value)}
             >
@@ -234,7 +234,7 @@ export default function ReportManagement() {
                 placeholder="Search by reporter, location, or hazard type..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white placeholder-gray-400 hover:border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all duration-200"
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg text-sm bg-white placeholder-gray-400 hover:border-blue-400 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 transition-all duration-200 shadow-sm"
               />
             </div>
           </div>
@@ -242,7 +242,7 @@ export default function ReportManagement() {
           <div className="flex items-end">
             <button
               onClick={() => {/* Optional: Add refresh/apply functionality */}}
-              className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white text-sm font-medium px-6 py-2 rounded-lg transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white text-sm font-medium px-6 py-2 rounded-lg transition-all duration-200 hover:shadow-lg transform hover:-translate-y-0.5 flex items-center justify-center gap-2"
             >
               Apply Filters
             </button>

@@ -38,8 +38,8 @@ const CitizenLayout = ({ children }) => {
       <aside className={`bg-white shadow-sm transition-all duration-300 flex flex-col ${open ? 'w-64' : 'w-16'} sticky top-0 self-start h-screen overflow-y-auto shrink-0 z-40`}>
         <div className="h-16 flex items-center justify-between px-3">
           <div className="flex items-center gap-2 overflow-hidden">
-            <img src="/STORM_without bg.png" alt="Logo" className="w-9 h-9 object-contain" />
-            {open && <span className="font-extrabold text-lg tracking-tight text-sky-600">STORM</span>}
+            <img src="/Strom_logo_withoutbg-2.png" alt="Logo" className="ml-8 mt-4 w-30 h-30 object-contain" />
+            {/* {open && <span className="font-extrabold text-lg tracking-tight text-sky-600">STORM</span>} */}
           </div>
           <button
             aria-label="Toggle navigation"

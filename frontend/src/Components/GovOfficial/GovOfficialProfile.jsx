@@ -96,7 +96,7 @@ const GovOfficialProfile = () => {
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-red-600 to-red-700 rounded-2xl text-white p-8 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl text-white p-8 relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative z-10">
           <div className="flex items-center justify-between">
@@ -114,7 +114,7 @@ const GovOfficialProfile = () => {
                   )}
                 </div>
                 {editMode && (
-                  <label className="absolute -bottom-2 -right-2 bg-white text-red-600 rounded-full p-2 cursor-pointer hover:bg-gray-100 transition-colors shadow-lg">
+                  <label className="absolute -bottom-2 -right-2 bg-white text-blue-600 rounded-full p-2 cursor-pointer hover:bg-gray-100 transition-colors shadow-lg">
                     <Camera className="w-4 h-4" />
                     <input 
                       type="file" 
@@ -127,14 +127,14 @@ const GovOfficialProfile = () => {
               </div>
               <div>
                 <h1 className="text-3xl font-bold mb-2">{profile.name}</h1>
-                <p className="text-red-100 text-lg mb-1">{profile.designation}</p>
-                <p className="text-red-200">{profile.department}</p>
+                <p className="text-white-100 text-lg mb-1">{profile.designation}</p>
+                <p className="text-white-200">{profile.department}</p>
                 <div className="flex items-center mt-3 space-x-4">
-                  <div className="flex items-center text-red-100">
+                  <div className="flex items-center text-white-100">
                     <Shield className="w-4 h-4 mr-2" />
                     {profile.clearanceLevel}
                   </div>
-                  <div className="flex items-center text-red-100">
+                  <div className="flex items-center text-white-100">
                     <MapPin className="w-4 h-4 mr-2" />
                     {profile.jurisdiction}
                   </div>
@@ -161,7 +161,7 @@ const GovOfficialProfile = () => {
                   </button>
                   <button
                     onClick={handleSave}
-                    className="bg-white text-red-600 hover:bg-gray-100 px-6 py-2 rounded-lg transition-colors flex items-center font-medium"
+                    className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-2 rounded-lg transition-colors flex items-center font-medium"
                   >
                     <Save className="w-4 h-4 mr-2" />
                     Save
@@ -185,7 +185,7 @@ const GovOfficialProfile = () => {
                   onClick={() => setActiveTab(tab.id)}
                   className={`py-4 px-2 border-b-2 font-medium text-sm flex items-center space-x-2 transition-colors ${
                     activeTab === tab.id
-                      ? 'border-red-500 text-red-600'
+                      ? 'border-blue-500 text-blue-600'
                       : 'border-transparent text-gray-500 hover:text-gray-700'
                   }`}
                 >
@@ -212,7 +212,7 @@ const GovOfficialProfile = () => {
                         type="text"
                         value={tempProfile.name}
                         onChange={(e) => setTempProfile(prev => ({ ...prev, name: e.target.value }))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       />
                     ) : (
                       <div className="flex items-center text-gray-900">
@@ -229,7 +229,7 @@ const GovOfficialProfile = () => {
                         type="email"
                         value={tempProfile.email}
                         onChange={(e) => setTempProfile(prev => ({ ...prev, email: e.target.value }))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       />
                     ) : (
                       <div className="flex items-center text-gray-900">
@@ -246,7 +246,7 @@ const GovOfficialProfile = () => {
                         type="tel"
                         value={tempProfile.phone}
                         onChange={(e) => setTempProfile(prev => ({ ...prev, phone: e.target.value }))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       />
                     ) : (
                       <div className="flex items-center text-gray-900">
@@ -263,7 +263,7 @@ const GovOfficialProfile = () => {
                         type="text"
                         value={tempProfile.location}
                         onChange={(e) => setTempProfile(prev => ({ ...prev, location: e.target.value }))}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       />
                     ) : (
                       <div className="flex items-center text-gray-900">
@@ -426,7 +426,7 @@ const GovOfficialProfile = () => {
                           checked={value}
                           onChange={(e) => setSettings(prev => ({ ...prev, [key]: e.target.checked }))}
                         />
-                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+                        <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
                       </label>
                     </div>
                   );
@@ -439,7 +439,7 @@ const GovOfficialProfile = () => {
                   <select
                     value={settings.language}
                     onChange={(e) => setSettings(prev => ({ ...prev, language: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="english">English</option>
                     <option value="hindi">Hindi</option>
@@ -454,7 +454,7 @@ const GovOfficialProfile = () => {
                   <select
                     value={settings.timezone}
                     onChange={(e) => setSettings(prev => ({ ...prev, timezone: e.target.value }))}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   >
                     <option value="Asia/Kolkata">Asia/Kolkata (IST)</option>
                     <option value="Asia/Mumbai">Asia/Mumbai</option>

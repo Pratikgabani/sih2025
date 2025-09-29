@@ -223,20 +223,20 @@ export default function AlertsManagement() {
 
   const getSeverityColor = (severity) => {
     switch (severity.toLowerCase()) {
-      case 'critical': return 'border-red-500';
-      case 'high': return 'border-orange-500';
-      case 'medium': return 'border-yellow-500';
-      case 'low': return 'border-green-500';
+      case 'critical': return 'border-blue-500';
+      case 'high': return 'border-blue-400';
+      case 'medium': return 'border-blue-300';
+      case 'low': return 'border-blue-200';
       default: return 'border-gray-500';
     }
   };
 
   const getSeverityBadgeColor = (severity) => {
     switch (severity.toLowerCase()) {
-      case 'critical': return 'bg-red-100 text-red-600 border-red-200';
-      case 'high': return 'bg-orange-100 text-orange-600 border-orange-200';
-      case 'medium': return 'bg-yellow-100 text-yellow-600 border-yellow-200';
-      case 'low': return 'bg-green-100 text-green-600 border-green-200';
+      case 'critical': return 'bg-blue-100 text-blue-600 border-blue-200';
+      case 'high': return 'bg-blue-100 text-blue-600 border-blue-200';
+      case 'medium': return 'bg-blue-100 text-blue-600 border-blue-200';
+      case 'low': return 'bg-blue-100 text-blue-600 border-blue-200';
       default: return 'bg-gray-100 text-gray-600 border-gray-200';
     }
   };
@@ -245,7 +245,7 @@ export default function AlertsManagement() {
     switch (status.toLowerCase()) {
       case 'active': return 'bg-green-100 text-green-600';
       case 'expired': return 'bg-gray-100 text-gray-600';
-      case 'cancelled': return 'bg-red-100 text-red-600';
+      case 'cancelled': return 'bg-blue-100 text-blue-600';
       default: return 'bg-gray-100 text-gray-600';
     }
   };
@@ -272,7 +272,7 @@ export default function AlertsManagement() {
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700"
+          className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
         >
           Create Alert
         </button>
@@ -306,7 +306,7 @@ export default function AlertsManagement() {
                       name="title"
                       value={formData.title}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                       required
                     >
                       <option value="">Select alert title</option>
@@ -329,7 +329,7 @@ export default function AlertsManagement() {
                       name="severity"
                       value={formData.severity}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                       required
                     >
                       <option value="">Select severity</option>
@@ -350,7 +350,7 @@ export default function AlertsManagement() {
                       value={formData.location}
                       onChange={handleInputChange}
                       placeholder="Affected area/region"
-                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                       required
                     />
                   </div>
@@ -365,7 +365,7 @@ export default function AlertsManagement() {
                       value={formData.radius}
                       onChange={handleInputChange}
                       placeholder="Alert coverage radius"
-                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                      className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                       required
                     />
                   </div>
@@ -381,7 +381,7 @@ export default function AlertsManagement() {
                     onChange={handleInputChange}
                     rows={4}
                     placeholder="Detailed alert message with specific instructions..."
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                     required
                   />
                 </div>
@@ -395,7 +395,7 @@ export default function AlertsManagement() {
                     name="expiryTime"
                     value={formData.expiryTime}
                     onChange={handleInputChange}
-                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
+                    className="w-full px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                     required
                   />
                 </div>
@@ -410,7 +410,7 @@ export default function AlertsManagement() {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium shadow-sm"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium shadow-sm"
                   >
                     {editingAlert ? 'Update Alert' : 'Send Alert'}
                   </button>
@@ -433,7 +433,7 @@ export default function AlertsManagement() {
             <select
               value={filterStatus}
               onChange={(e) => setFilterStatus(e.target.value)}
-              className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+              className="px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm bg-white"
             >
               <option value="all">All Status</option>
               <option value="active">Active</option>
@@ -444,7 +444,7 @@ export default function AlertsManagement() {
             <select
               value={filterSeverity}
               onChange={(e) => setFilterSeverity(e.target.value)}
-              className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
+              className="px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm bg-white"
             >
               <option value="all">All Severity</option>
               <option value="critical">Critical</option>
@@ -458,13 +458,13 @@ export default function AlertsManagement() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search alerts..."
-              className="px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 min-w-[200px]"
+              className="px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm min-w-[200px]"
             />
           </div>
         </div>
         <div className="space-y-3">
           {filteredAlerts.map((alert) => (
-            <div key={alert.id} className="border border-gray-200 rounded-xl p-5 hover:border-gray-300 hover:shadow-sm transition-all duration-200 bg-white">
+            <div key={alert.id} className="shadow-sm rounded-xl p-5 hover:shadow-md transition-all duration-200 bg-white">
               <div className="flex items-start justify-between">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-3 mb-3">
@@ -531,8 +531,8 @@ export default function AlertsManagement() {
         {/* Empty State */}
         {filteredAlerts.length === 0 && (
           <div className="text-center py-16">
-            <div className="bg-gray-50 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
-              <AlertTriangle size={32} className="text-gray-400" />
+            <div className="bg-blue-50 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center">
+              <AlertTriangle size={32} className="text-blue-600" />
             </div>
             <h3 className="text-lg font-medium text-gray-900 mb-2">No alerts found</h3>
             <p className="text-gray-500 max-w-sm mx-auto mb-6">
@@ -544,7 +544,7 @@ export default function AlertsManagement() {
             {(!searchTerm && filterStatus === 'all' && filterSeverity === 'all') && (
               <button
                 onClick={() => setShowForm(true)}
-                className="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium"
+                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
               >
                 <Plus size={16} className="mr-2" />
                 Create First Alert
@@ -560,8 +560,8 @@ export default function AlertsManagement() {
           <div className="bg-white rounded-xl max-w-md w-full shadow-2xl border border-gray-200">
             <div className="p-6">
               <div className="flex items-center mb-4">
-                <div className="bg-red-50 rounded-full p-2 mr-4">
-                  <AlertTriangle size={24} className="text-red-600" />
+                <div className="bg-blue-50 rounded-full p-2 mr-4">
+                  <AlertTriangle size={24} className="text-blue-600" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900">Delete Alert</h3>
               </div>
@@ -577,7 +577,7 @@ export default function AlertsManagement() {
                 </button>
                 <button
                   onClick={() => handleDelete(showDeleteConfirm)}
-                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
                 >
                   Delete Alert
                 </button>

@@ -136,7 +136,7 @@ export default function TeamManagement() {
         </div>
         <button
           onClick={() => setShowForm(!showForm)}
-          className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700"
+          className="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
         >
           Request Team
         </button>
@@ -170,7 +170,7 @@ export default function TeamManagement() {
                 name="hazardType"
                 value={formData.hazardType}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 shadow-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="">Select hazard type</option>
@@ -192,7 +192,7 @@ export default function TeamManagement() {
                 value={formData.location}
                 onChange={handleInputChange}
                 placeholder="Enter specific location"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 shadow-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
@@ -205,7 +205,7 @@ export default function TeamManagement() {
                 name="severity"
                 value={formData.severity}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 shadow-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="">Select severity</option>
@@ -226,7 +226,7 @@ export default function TeamManagement() {
                 value={formData.teamSize}
                 onChange={handleInputChange}
                 placeholder="Number of personnel"
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 shadow-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               />
             </div>
@@ -239,7 +239,7 @@ export default function TeamManagement() {
                 name="specialization"
                 value={formData.specialization}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 shadow-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="">Select specialization</option>
@@ -261,7 +261,7 @@ export default function TeamManagement() {
                 value={formData.equipment}
                 onChange={handleInputChange}
                 placeholder="Boats, medical supplies, etc."
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 shadow-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
 
@@ -273,7 +273,7 @@ export default function TeamManagement() {
                 name="urgency"
                 value={formData.urgency}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 shadow-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 required
               >
                 <option value="">Select urgency</option>
@@ -294,7 +294,7 @@ export default function TeamManagement() {
                 onChange={handleInputChange}
                 rows={3}
                 placeholder="Describe the current situation and specific requirements..."
-                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-4 py-2 shadow-sm rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
                 </div>
@@ -303,13 +303,13 @@ export default function TeamManagement() {
                   <button
                     type="button"
                     onClick={handleCancel}
-                    className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                    className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors shadow-sm"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
                   >
                     {editingTeam ? 'Update Team' : 'Submit Request'}
                   </button>
@@ -326,7 +326,7 @@ export default function TeamManagement() {
           <h2 className="text-xl font-bold text-gray-800 mb-4">Active Teams & Requests</h2>
           <div className="grid grid-cols-1 gap-4">
           {teams.map((team) => (
-            <div key={team.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div key={team.id} className="shadow-sm rounded-lg p-4 hover:shadow-md transition-shadow">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center space-x-2 mb-2">
@@ -393,7 +393,7 @@ export default function TeamManagement() {
       <div className="bg-white rounded-lg shadow-lg p-6">
         <h2 className="text-xl font-bold text-gray-800 mb-4">Emergency Contacts</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="border rounded-lg p-4">
+          <div className="shadow-sm rounded-lg p-4">
             <h3 className="font-medium text-gray-800 mb-2">Coast Guard</h3>
             <div className="flex items-center text-gray-600 mb-1">
               <Phone className="w-4 h-4 mr-2" />
@@ -405,7 +405,7 @@ export default function TeamManagement() {
             </div>
           </div>
           
-          <div className="border rounded-lg p-4">
+          <div className="shadow-sm rounded-lg p-4">
             <h3 className="font-medium text-gray-800 mb-2">Disaster Management</h3>
             <div className="flex items-center text-gray-600 mb-1">
               <Phone className="w-4 h-4 mr-2" />
@@ -417,7 +417,7 @@ export default function TeamManagement() {
             </div>
           </div>
           
-          <div className="border rounded-lg p-4">
+          <div className="shadow-sm rounded-lg p-4">
             <h3 className="font-medium text-gray-800 mb-2">Medical Emergency</h3>
             <div className="flex items-center text-gray-600 mb-1">
               <Phone className="w-4 h-4 mr-2" />

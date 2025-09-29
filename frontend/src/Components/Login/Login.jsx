@@ -17,7 +17,7 @@ export default function Login() {
 
   return (
     <div className="min-h-full flex items-start justify-center py-4 md:py-8">
-      <div className="bg-white shadow-lg rounded-xl p-6 md:p-8 w-full max-w-md mx-4 md:mx-auto min-h-fit">
+      <div className="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md mx-4 md:mx-auto min-h-fit">
         
         {/* Tabs */}
         <div className="flex mb-6">
@@ -72,7 +72,7 @@ export default function Login() {
                 <input
                   type="password"
                   placeholder="Enter your password"
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm"
                 />
               </div>
               <div>
@@ -82,7 +82,7 @@ export default function Login() {
                 <select
                   value={signInRole}
                   onChange={(e)=>setSignInRole(e.target.value)}
-                  className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700"
+                  className="w-full px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-700 shadow-sm"
                 >
                   <option value="citizen">Citizen Reporter</option>
                   <option value="analyst">Analyst</option>
@@ -91,7 +91,7 @@ export default function Login() {
               </div>
               <button
                 type="submit"
-                className="w-full py-2 rounded-lg bg-blue-600 text-white font-semibold hover:opacity-90 transition"
+                className="w-full py-3 rounded-lg bg-blue-600 text-white font-semibold hover:opacity-90 transition shadow-md hover:shadow-lg"
               >
                 Access Platform
               </button>
