@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
-import { Home, AlertTriangle, FileText, Users, UserCircle } from 'lucide-react';
+import { Home, AlertTriangle, FileText, Users, UserCircle, LogOut } from 'lucide-react';
 
 const navItems = [
   { key: 'dashboard', label: 'Dashboard', to: '/govofficial/dashboard', icon: Home },
@@ -80,9 +80,10 @@ const GovOfficialLayout = ({ children }) => {
           <div className="font-semibold text-gray-800">Government Portal</div>
           <button
             onClick={() => { localStorage.removeItem('role'); navigate('/login'); }}
-            className="px-3 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm"
+            className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-red-100 hover:bg-red-200 text-red-700 hover:text-red-800 text-sm font-medium transition-colors duration-200"
           >
-            Logout
+            <LogOut className="w-4 h-4" />
+            <span>Logout</span>
           </button>
         </div>
         <div className="p-5 md:p-7 lg:p-9">
