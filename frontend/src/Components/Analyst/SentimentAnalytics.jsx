@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { PieChart, DonutChart, BarChart, LineChart } from "./Charts";
 import { 
   TrendingUp, 
   TrendingDown, 
   AlertTriangle, 
   MessageSquare, 
-  Users,
-  ArrowLeft
+  Users
 } from "lucide-react";
 
 export default function SentimentAnalytics() {
-  const navigate = useNavigate();
   const [timeRange, setTimeRange] = useState('24h');
   const [selectedRegion, setSelectedRegion] = useState('all');
 
@@ -65,15 +62,6 @@ export default function SentimentAnalytics() {
 
   return (
     <div className="space-y-6">
-      {/* Back Button */}
-      <button
-        onClick={() => navigate(-1)}
-        className="flex items-center text-sky-600 hover:text-sky-800 transition-colors duration-200 mb-4"
-      >
-        <ArrowLeft className="w-5 h-5 mr-2" />
-        Back
-      </button>
-
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

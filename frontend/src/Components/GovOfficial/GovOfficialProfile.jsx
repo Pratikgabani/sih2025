@@ -96,13 +96,13 @@ const GovOfficialProfile = () => {
   return (
     <div className="max-w-6xl mx-auto p-6 space-y-6">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl text-white p-8 relative overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-400 to-blue-500 rounded-2xl text-white p-6 relative overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative z-10">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-4">
               <div className="relative">
-                <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
+                <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
                   {profile.photo ? (
                     <img 
                       src={profile.photo} 
@@ -110,7 +110,7 @@ const GovOfficialProfile = () => {
                       className="w-full h-full rounded-full object-cover"
                     />
                   ) : (
-                    <User className="w-12 h-12 text-white" />
+                    <User className="w-10 h-10 text-white" />
                   )}
                 </div>
                 {editMode && (
@@ -126,15 +126,15 @@ const GovOfficialProfile = () => {
                 )}
               </div>
               <div>
-                <h1 className="text-3xl font-bold mb-2">{profile.name}</h1>
-                <p className="text-white-100 text-lg mb-1">{profile.designation}</p>
-                <p className="text-white-200">{profile.department}</p>
-                <div className="flex items-center mt-3 space-x-4">
-                  <div className="flex items-center text-white-100">
+                <h1 className="text-2xl font-bold mb-1">{profile.name}</h1>
+                <p className="text-white-100 text-base mb-1">{profile.designation}</p>
+                <p className="text-white-200 text-sm">{profile.department}</p>
+                <div className="flex items-center mt-2 space-x-4">
+                  <div className="flex items-center text-white-100 text-sm">
                     <Shield className="w-4 h-4 mr-2" />
                     {profile.clearanceLevel}
                   </div>
-                  <div className="flex items-center text-white-100">
+                  <div className="flex items-center text-white-100 text-sm">
                     <MapPin className="w-4 h-4 mr-2" />
                     {profile.jurisdiction}
                   </div>
@@ -145,25 +145,25 @@ const GovOfficialProfile = () => {
               {!editMode ? (
                 <button
                   onClick={() => setEditMode(true)}
-                  className="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg backdrop-blur-sm transition-colors flex items-center"
+                  className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg backdrop-blur-sm transition-colors flex items-center text-sm"
                 >
-                  <Edit3 className="w-5 h-5 mr-2" />
+                  <Edit3 className="w-4 h-4 mr-2" />
                   Edit Profile
                 </button>
               ) : (
-                <div className="flex space-x-3">
+                <div className="flex space-x-2">
                   <button
                     onClick={handleCancel}
-                    className="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg backdrop-blur-sm transition-colors flex items-center"
+                    className="bg-white/20 hover:bg-white/30 text-white px-3 py-2 rounded-lg backdrop-blur-sm transition-colors flex items-center text-sm"
                   >
-                    <X className="w-4 h-4 mr-2" />
+                    <X className="w-4 h-4 mr-1" />
                     Cancel
                   </button>
                   <button
                     onClick={handleSave}
-                    className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-2 rounded-lg transition-colors flex items-center font-medium"
+                    className="bg-white text-blue-600 hover:bg-gray-100 px-4 py-2 rounded-lg transition-colors flex items-center font-medium text-sm"
                   >
-                    <Save className="w-4 h-4 mr-2" />
+                    <Save className="w-4 h-4 mr-1" />
                     Save
                   </button>
                 </div>

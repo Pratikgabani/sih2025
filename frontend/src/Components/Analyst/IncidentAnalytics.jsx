@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { BarChart, LineChart, PieChart, DonutChart } from "./Charts";
 import { 
   TrendingUp, 
@@ -10,12 +9,10 @@ import {
   Clock,
   Target,
   Users,
-  Calendar,
-  ArrowLeft
+  Calendar
 } from "lucide-react";
 
 export default function IncidentAnalytics() {
-  const navigate = useNavigate();
   const [timeRange, setTimeRange] = useState('24h');
   const [viewType, setViewType] = useState('trends');
 
@@ -62,15 +59,6 @@ export default function IncidentAnalytics() {
 
   return (
     <div className="space-y-6">
-      {/* Back Button */}
-      <button
-        onClick={() => navigate(-1)}
-        className="flex items-center text-sky-600 hover:text-sky-800 transition-colors duration-200 mb-4"
-      >
-        <ArrowLeft className="w-5 h-5 mr-2" />
-        Back
-      </button>
-
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>

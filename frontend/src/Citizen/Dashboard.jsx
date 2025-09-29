@@ -19,9 +19,10 @@ const Dashboard = () => {
   const streamRef = useRef(null);
   const emergencyContacts = [
     { label: 'Emergency', phone: '112' },
-    { label: 'Police', phone: '100' },
+    // { label: 'Police', phone: '100' },
     { label: 'Fire', phone: '101' },
     { label: 'Coast Guard', phone: '1554' },
+    { label: 'Disaster Management', phone: '1077' },
   ];
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const Dashboard = () => {
   }, [profile.gpsOn]);
 
   // Trust score breakdown
-  const { totalTrust, reportTrust, volunteerTrust } = useMemo(() => {
+  const { totalTrust, reportTrust, volunteerTrust, trustLevel } = useMemo(() => {
     const reports = getReports();
     const reportCount = Array.isArray(reports) ? reports.length : 0;
     const reportScore = Math.min(60, reportCount * 6); // up to 60
@@ -66,7 +67,35 @@ const Dashboard = () => {
       const completed = Number(vs.completed || 0);
       volunteerScore = Math.min(40, completed * 8); // up to 40
     } catch {}
-    return { totalTrust: reportScore + volunteerScore, reportTrust: reportScore, volunteerTrust: volunteerScore };
+    
+    const total = reportScore + volunteerScore;
+    
+    // Calculate trust level and range
+    let level, range, color;
+    if (total >= 80) {
+      level = 'Excellent';
+      range = '80-100';
+      color = 'text-green-600';
+    } else if (total >= 60) {
+      level = 'Good';
+      range = '60-79';
+      color = 'text-blue-600';
+    } else if (total >= 40) {
+      level = 'Average';
+      range = '40-59';
+      color = 'text-yellow-600';
+    } else {
+      level = 'Poor';
+      range = '0-39';
+      color = 'text-orange-600';
+    }
+    
+    return { 
+      totalTrust: total, 
+      reportTrust: reportScore, 
+      volunteerTrust: volunteerScore,
+      trustLevel: { level, range, color }
+    };
   }, [profile]);
 
   const hotspotBounds = { top: 90, bottom: -90, left: -180, right: 180 };
@@ -170,10 +199,17 @@ const Dashboard = () => {
             <div className="text-2xl font-bold text-sky-700">{now.toLocaleTimeString()}</div>
           </div>
         </div>
-        <div className="bg-white rounded-xl shadow-sm p-5">
+        <div className="bg-white rounded-xl shadow-sm p-3.5">
           <div className="text-sm text-gray-500">Trust Score</div>
-          <div className="mt-2 text-2xl font-bold text-sky-700">{totalTrust}%</div>
-          <div className="mt-3 space-y-2">
+          <div className="mt-1 flex items-center gap-2">
+            <span className="text-2xl font-bold text-sky-700">{totalTrust}</span>
+            <span className="text-sm text-gray-500">/ 100</span>
+          </div>
+            {/* <div className="mt-1 flex items-center gap-2">
+              <span className={`text-sm font-semibold ${trustLevel.color}`}>{trustLevel.level}</span>
+              <span className="text-xs text-gray-500">({trustLevel.range})</span>
+            </div> */}
+          <div className="mt-2 space-y-1">
             <div className="flex items-center justify-between text-sm">
               <span className="text-gray-600">Reports</span>
               <span className="font-semibold text-gray-800">{reportTrust}</span>
@@ -189,16 +225,39 @@ const Dashboard = () => {
               <div className="h-full bg-emerald-500" style={{ width: `${(volunteerTrust/40)*100}%` }} />
             </div>
           </div>
+          
+          {/* Trust Score Rules */}
+          <div className="mt-2.5 pt-2 border-t border-gray-100">
+            <div className="text-xs text-gray-500 mb-1 font-medium">Score Ranges:</div>
+            <div className="grid grid-cols-2 gap-x-2.5 gap-y-0 text-xs">
+              <div className="flex justify-between">
+                <span className="text-green-600 font-medium">Excellent</span>
+                <span className="text-gray-500">80-100</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-blue-600 font-medium">Good</span>
+                <span className="text-gray-500">60-79</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-yellow-600 font-medium">Average</span>
+                <span className="text-gray-500">40-59</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-orange-600 font-medium">Poor</span>
+                <span className="text-gray-500">0-39</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div className="bg-white rounded-xl shadow-sm p-5">
-          <div className="text-sm text-gray-500 mb-2">Emergency Contacts</div>
-          <div className="mt-1 divide-y divide-gray-100">
+        <div className="bg-white rounded-xl shadow-sm p-3">
+          <div className="text-sm text-gray-500 mb-1">Emergency Contacts</div>
+          <div className="divide-y divide-gray-100">
             {emergencyContacts.map((c) => (
-              <div key={c.phone} className="flex items-center justify-between py-2">
-                <div className="flex-1 text-gray-800 font-medium">{c.label}</div>
-                <div className="flex-1 text-gray-700">{c.phone}</div>
-                <a href={`tel:${c.phone}`} aria-label={`Call ${c.label}`} className="p-2 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-700 shadow-sm">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5"><path d="M2.25 6.75c0-1.243 1.007-2.25 2.25-2.25h3.04c.994 0 1.86.652 2.136 1.604l.66 2.31a2.25 2.25 0 01-.54 2.19l-1.21 1.21a15.75 15.75 0 006.29 6.29l1.21-1.21a2.25 2.25 0 012.19-.54l2.31.66c.952.276 1.604 1.142 1.604 2.136v3.04c0 1.243-1.007 2.25-2.25 2.25h-.75C8.518 22.5 1.5 15.482 1.5 6.75v-.75z"/></svg>
+              <div key={c.phone} className="flex items-center justify-between py-1.5">
+                <div className="flex-1 text-gray-800 font-medium text-sm">{c.label}</div>
+                <div className="flex-1 text-gray-700 text-sm">{c.phone}</div>
+                <a href={`tel:${c.phone}`} aria-label={`Call ${c.label}`} className="p-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-700 shadow-sm">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4"><path d="M2.25 6.75c0-1.243 1.007-2.25 2.25-2.25h3.04c.994 0 1.86.652 2.136 1.604l.66 2.31a2.25 2.25 0 01-.54 2.19l-1.21 1.21a15.75 15.75 0 006.29 6.29l1.21-1.21a2.25 2.25 0 012.19-.54l2.31.66c.952.276 1.604 1.142 1.604 2.136v3.04c0 1.243-1.007 2.25-2.25 2.25h-.75C8.518 22.5 1.5 15.482 1.5 6.75v-.75z"/></svg>
                 </a>
               </div>
             ))}

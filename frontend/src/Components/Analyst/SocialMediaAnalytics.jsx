@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { BarChart, LineChart, PieChart, DonutChart } from "./Charts";
 import { 
   Hash, 
@@ -11,12 +10,10 @@ import {
   Heart,
   Repeat,
   AlertTriangle,
-  Smartphone,
-  ArrowLeft
+  Smartphone
 } from "lucide-react";
 
 export default function SocialMediaAnalytics() {
-  const navigate = useNavigate();
   const [platform, setPlatform] = useState('all');
   const [timeRange, setTimeRange] = useState('24h');
 
@@ -61,15 +58,6 @@ export default function SocialMediaAnalytics() {
     { tag: '#coastalflood', mentions: 2345, trend: '+87%', sentiment: 'inform', verified: 85 }
   ];
 
-  // Influencer impact
-  const influencerData = [
-    { label: 'News Outlets', value: 45, color: '#DC2626' },
-    { label: 'Government', value: 23, color: '#059669' },
-    { label: 'Celebrities', value: 34, color: '#7C3AED' },
-    { label: 'Local Leaders', value: 67, color: '#0284C7' },
-    { label: 'Citizens', value: 156, color: '#F59E0B' }
-  ];
-
   // Misinformation tracking
   const misinfoData = [
     { label: 'Verified Info', value: 78, color: '#10B981' },
@@ -100,15 +88,6 @@ export default function SocialMediaAnalytics() {
 
   return (
     <div className="space-y-6">
-      {/* Back Button */}
-      <button
-        onClick={() => navigate(-1)}
-        className="flex items-center text-sky-600 hover:text-sky-800 transition-colors duration-200 mb-4"
-      >
-        <ArrowLeft className="w-5 h-5 mr-2" />
-        Back
-      </button>
-
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
@@ -198,27 +177,7 @@ export default function SocialMediaAnalytics() {
       </div>
 
       {/* Detailed Analysis Panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Influencer Impact */}
-        <div className="bg-white rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-            <Users className="w-5 h-5 text-purple-600 mr-2" />
-            Influencer Impact Analysis
-          </h3>
-          <div className="space-y-4">
-            <BarChart
-              data={influencerData}
-              title=""
-              color="#7C3AED"
-            />
-            <div className="text-xs text-gray-600 mt-2">
-              <p>• Government accounts: Highest credibility (95%)</p>
-              <p>• News outlets: Fastest spread (avg 23 min)</p>
-              <p>• Celebrities: Maximum reach (2.1M avg)</p>
-            </div>
-          </div>
-        </div>
-
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Viral Content Analysis */}
         <div className="bg-white rounded-lg border border-gray-200 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
