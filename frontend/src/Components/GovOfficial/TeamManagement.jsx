@@ -4,6 +4,8 @@ import { Users, MapPin, Clock, Phone, Mail, Plus, Edit, Trash2, AlertTriangle, X
 
 export default function TeamManagement() {
   const [showForm, setShowForm] = useState(false);
+  const [editingTeam, setEditingTeam] = useState(null);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
   const [formData, setFormData] = useState({
     hazardType: '',
     location: '',
@@ -68,6 +70,63 @@ export default function TeamManagement() {
     setShowForm(false);
   };
 
+  const handleEdit = (team) => {
+    setEditingTeam(team.id);
+    setFormData({
+      hazardType: team.hazardType,
+      location: team.location,
+      severity: team.severity || '',
+      teamSize: team.teamSize.toString(),
+      specialization: team.specialization,
+      equipment: team.equipment || '',
+      urgency: team.urgency || '',
+      description: team.description || ''
+    });
+    setShowForm(true);
+  };
+
+  const handleUpdate = (e) => {
+    e.preventDefault();
+    const updatedTeams = teams.map(team => 
+      team.id === editingTeam 
+        ? { ...team, ...formData, teamSize: parseInt(formData.teamSize) }
+        : team
+    );
+    setTeams(updatedTeams);
+    setFormData({
+      hazardType: '',
+      location: '',
+      severity: '',
+      teamSize: '',
+      specialization: '',
+      equipment: '',
+      urgency: '',
+      description: ''
+    });
+    setEditingTeam(null);
+    setShowForm(false);
+  };
+
+  const handleDelete = (teamId) => {
+    setTeams(teams.filter(team => team.id !== teamId));
+    setShowDeleteConfirm(null);
+  };
+
+  const handleCancel = () => {
+    setFormData({
+      hazardType: '',
+      location: '',
+      severity: '',
+      teamSize: '',
+      specialization: '',
+      equipment: '',
+      urgency: '',
+      description: ''
+    });
+    setEditingTeam(null);
+    setShowForm(false);
+  };
+
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
@@ -85,13 +144,15 @@ export default function TeamManagement() {
 
       {/* Team Request Modal */}
       {showForm && (
-        <div className="fixed inset-0 backdrop-blur-md flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-gray-200">
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-lg flex items-center justify-center p-4 z-50">
+          <div className="bg-white/95 backdrop-blur-xl rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl border border-white/20 ring-1 ring-black/5">
             <div className="p-6">
               <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-semibold text-gray-900">Request Emergency Response Team</h2>
+                <h2 className="text-xl font-semibold text-gray-900">
+                  {editingTeam ? 'Edit Emergency Response Team' : 'Request Emergency Response Team'}
+                </h2>
                 <button
-                  onClick={() => setShowForm(false)}
+                  onClick={handleCancel}
                   className="p-2 hover:bg-gray-100 rounded-lg transition-colors duration-200"
                   aria-label="Close modal"
                 >
@@ -99,7 +160,7 @@ export default function TeamManagement() {
                 </button>
               </div>
               
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={editingTeam ? handleUpdate : handleSubmit} className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -241,7 +302,7 @@ export default function TeamManagement() {
                 <div className="flex justify-end space-x-3 pt-4">
                   <button
                     type="button"
-                    onClick={() => setShowForm(false)}
+                    onClick={handleCancel}
                     className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
                   >
                     Cancel
@@ -250,7 +311,7 @@ export default function TeamManagement() {
                     type="submit"
                     className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
                   >
-                    Submit Request
+                    {editingTeam ? 'Update Team' : 'Submit Request'}
                   </button>
                 </div>
           </form>
@@ -308,10 +369,17 @@ export default function TeamManagement() {
                 </div>
                 
                 <div className="flex space-x-2 ml-4">
-                  <button className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
+                  <button 
+                    onClick={() => handleEdit(team)}
+                    className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                  >
                     <Edit className="w-4 h-4" />
                   </button>
-                  <button className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors">
+                  <button 
+                    onClick={() => setShowDeleteConfirm(team.id)}
+                    className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    title="Delete Team"
+                  >
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
@@ -363,6 +431,39 @@ export default function TeamManagement() {
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Modal */}
+      {showDeleteConfirm && (
+        <div className="fixed inset-0 bg-black/20 backdrop-blur-lg flex items-center justify-center p-4 z-50">
+          <div className="bg-white/95 backdrop-blur-xl rounded-xl max-w-md w-full shadow-2xl border border-white/20 ring-1 ring-black/5">
+            <div className="p-6">
+              <div className="flex items-center mb-4">
+                <div className="bg-red-50 rounded-full p-2 mr-4">
+                  <AlertTriangle size={24} className="text-red-600" />
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">Delete Team</h3>
+              </div>
+              <p className="text-gray-600 mb-6 leading-relaxed">
+                Are you sure you want to delete this team? This action cannot be undone and the team will be permanently removed.
+              </p>
+              <div className="flex justify-end gap-3">
+                <button
+                  onClick={() => setShowDeleteConfirm(null)}
+                  className="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-200 font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleDelete(showDeleteConfirm)}
+                  className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 font-medium"
+                >
+                  Delete Team
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

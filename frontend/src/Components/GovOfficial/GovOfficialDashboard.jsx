@@ -1,15 +1,94 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AlertTriangle, Users, MapPin, CheckCircle, TrendingUp, MessageSquare, Calendar, Clock } from "lucide-react";
+import { AlertTriangle, Users, MapPin, CheckCircle, TrendingUp, MessageSquare, Calendar, Clock, Layers } from "lucide-react";
+import MapArea from "../Map/MapArea";
+import "../Map/windy-interactive.css";
 
 export default function GovOfficialDashboard() {
   const navigate = useNavigate();
   
+  // Map state management
+  const [hotspots, setHotspots] = useState([
+    {
+      id: 1,
+      latitude: 19.0760,
+      longitude: 72.8777,
+      severity: 'critical',
+      type: 'Tsunami Warning',
+      description: 'High risk tsunami zone - immediate evacuation required',
+      timestamp: new Date(),
+      source: 'manual'
+    },
+    {
+      id: 2,
+      latitude: 11.0168,
+      longitude: 76.9558,
+      severity: 'high',
+      type: 'Coastal Flooding',
+      description: 'Severe coastal flooding expected due to high tides',
+      timestamp: new Date(),
+      source: 'manual'
+    },
+    {
+      id: 3,
+      latitude: 13.0827,
+      longitude: 80.2707,
+      severity: 'medium',
+      type: 'High Waves',
+      description: 'Wave heights exceeding 3 meters reported',
+      timestamp: new Date(),
+      source: 'manual'
+    }
+  ]);
+
+  const [selectedHotspotId, setSelectedHotspotId] = useState(null);
+  const [currentLayer, setCurrentLayer] = useState('wind');
+  const [mapLoading, setMapLoading] = useState(false);
+
+  // Map bounds for India's coastal areas
+  const mapBounds = {
+    north: 30.0,
+    south: 6.0,
+    west: 68.0,
+    east: 98.0
+  };
+
+  // Function to create new hotspot
+  const createHotspot = async (lat, lng, source = 'manual') => {
+    setMapLoading(true);
+    
+    // Simulate API call
+    setTimeout(() => {
+      const newHotspot = {
+        id: Date.now(),
+        latitude: lat,
+        longitude: lng,
+        severity: 'medium',
+        type: 'New Hazard',
+        description: 'Government official added hazard point',
+        timestamp: new Date(),
+        source: source
+      };
+      
+      setHotspots(prev => [...prev, newHotspot]);
+      setMapLoading(false);
+    }, 1000);
+  };
+
+  // Available layers for the map
+  const availableLayers = [
+    { id: 'wind', name: 'Wind', icon: '💨' },
+    { id: 'waves', name: 'Waves', icon: '🌊' },
+    { id: 'temp', name: 'Temperature', icon: '🌡️' },
+    { id: 'rain', name: 'Precipitation', icon: '🌧️' },
+    { id: 'pressure', name: 'Pressure', icon: '📊' }
+  ];
+  
   // Mock data for demonstration
   const stats = {
     reports24h: 47,
-    hotspotAreas: 5,
-    activeAlerts: 3,
+    hotspotAreas: hotspots.length,
+    activeAlerts: hotspots.filter(h => h.severity === 'critical' || h.severity === 'high').length,
     verifiedReports: 23
   };
 
@@ -101,31 +180,97 @@ export default function GovOfficialDashboard() {
         </div>
       </div>
 
-      {/* Map Section */}
+      {/* Interactive Live Hazard Map */}
       <div className="bg-white rounded-xl shadow-sm overflow-hidden">
         <div className="p-6">
-          <h2 className="text-xl font-bold text-gray-800 mb-4">Live Hazard Map</h2>
-        <div className="h-96 bg-blue-50 rounded-lg flex items-center justify-center border-2 border-dashed border-blue-200">
-          <div className="text-center">
-            <MapPin className="w-16 h-16 text-blue-400 mx-auto mb-4" />
-            <p className="text-lg font-medium text-gray-600">Interactive Map Component</p>
-            <p className="text-sm text-gray-500">Showing crowdsourced reports and hotspots</p>
-            <div className="mt-4 flex justify-center space-x-4">
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-                <span className="text-sm text-gray-600">Critical Reports</span>
-              </div>
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
-                <span className="text-sm text-gray-600">Medium Reports</span>
-              </div>
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                <span className="text-sm text-gray-600">Low Reports</span>
+          <div className="flex items-center justify-between mb-4">
+            <div>
+              <h2 className="text-xl font-bold text-gray-800">Live Hazard Management Map</h2>
+              <p className="text-sm text-gray-600">Click on the map to add hazard hotspots • {hotspots.length} active hotspots</p>
+            </div>
+            <div className="flex items-center space-x-2">
+              {/* Layer Selection */}
+              <select
+                value={currentLayer}
+                onChange={(e) => setCurrentLayer(e.target.value)}
+                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              >
+                {availableLayers.map(layer => (
+                  <option key={layer.id} value={layer.id}>
+                    {layer.icon} {layer.name}
+                  </option>
+                ))}
+              </select>
+              <div className="flex items-center text-sm text-gray-600">
+                <Layers className="w-4 h-4 mr-1" />
+                <span>Layers</span>
               </div>
             </div>
           </div>
+          
+          {/* Map Statistics */}
+          <div className="grid grid-cols-4 gap-4 mb-4">
+            <div className="text-center p-3 bg-red-50 rounded-lg">
+              <div className="text-2xl font-bold text-red-600">
+                {hotspots.filter(h => h.severity === 'critical').length}
+              </div>
+              <div className="text-xs text-red-600">Critical</div>
+            </div>
+            <div className="text-center p-3 bg-orange-50 rounded-lg">
+              <div className="text-2xl font-bold text-orange-600">
+                {hotspots.filter(h => h.severity === 'high').length}
+              </div>
+              <div className="text-xs text-orange-600">High</div>
+            </div>
+            <div className="text-center p-3 bg-yellow-50 rounded-lg">
+              <div className="text-2xl font-bold text-yellow-600">
+                {hotspots.filter(h => h.severity === 'medium').length}
+              </div>
+              <div className="text-xs text-yellow-600">Medium</div>
+            </div>
+            <div className="text-center p-3 bg-green-50 rounded-lg">
+              <div className="text-2xl font-bold text-green-600">
+                {hotspots.filter(h => h.severity === 'low').length}
+              </div>
+              <div className="text-xs text-green-600">Low</div>
+            </div>
+          </div>
         </div>
+        
+        {/* Integrated Map Component */}
+        <div className="h-[500px] relative">
+          <MapArea
+            bounds={mapBounds}
+            hotspots={hotspots}
+            createHotspot={createHotspot}
+            selectedHotspotId={selectedHotspotId}
+            currentLayer={currentLayer}
+            loading={mapLoading}
+          />
+        </div>
+        
+        {/* Map Controls and Legend */}
+        <div className="p-4 bg-gray-50 border-t">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="text-sm text-gray-600">
+                <span className="font-medium">Click to add hotspot</span> • 
+                <span className="ml-1">Hover for coordinates</span>
+              </div>
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center space-x-2 text-xs">
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+                <span>Critical</span>
+                <div className="w-3 h-3 bg-orange-500 rounded-full ml-3"></div>
+                <span>High</span>
+                <div className="w-3 h-3 bg-yellow-500 rounded-full ml-3"></div>
+                <span>Medium</span>
+                <div className="w-3 h-3 bg-green-500 rounded-full ml-3"></div>
+                <span>Low</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
