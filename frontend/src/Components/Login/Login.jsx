@@ -11,6 +11,7 @@ export default function Login() {
   const gotoByRole = (role) => {
     localStorage.setItem("role", role);
     if (role === "citizen") navigate("/citizen/dashboard");
+    else if (role === "government") navigate("/govofficial/dashboard");
     else navigate("/dashboard");
   };
 

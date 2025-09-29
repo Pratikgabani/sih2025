@@ -7,7 +7,9 @@ const nav = [
   { name: "Dashboard", path: "/dashboard" },
   { name: "Map", path: "/map" },
   { name: "Reports", path: "/report" },
-  // { name: "Social", path: "/social" },
+  { name: "Team Management", path: "/team-management" },
+  { name: "Report Management", path: "/report-management" },
+  { name: "Alerts", path: "/alerts" },
   // { name: "Settings", path: "/settings" },
 ];
 

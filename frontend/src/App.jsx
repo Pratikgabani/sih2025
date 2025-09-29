@@ -6,6 +6,7 @@ import WindyInteractive from './Components/Map/WindyInteractive.jsx';
 import Login from './Components/Login/Login.jsx';
 import Dashboard from './Components/Dashboard/Dashboard.jsx';
 import CitizenApp from './Citizen/citizenDashboard.jsx';
+import GovOfficialApp from './Components/GovOfficial/GovOfficialApp.jsx';
 
 const App = () => {
   return (
@@ -17,6 +18,9 @@ const App = () => {
 
         {/* Citizen app has its own layout/sidebar */}
         <Route path="/citizen/*" element={<CitizenApp />} />
+
+        {/* Government Official app has its own layout/sidebar */}
+        <Route path="/govofficial/*" element={<GovOfficialApp />} />
 
         {/* Routes that should use the global Layout with sidebar */}
         <Route element={<Layout />}>
